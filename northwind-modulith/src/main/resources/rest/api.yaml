@@ -1,0 +1,238 @@
+openapi: 3.0.1
+info:
+  title: Northwind Modulith API
+  description: Northwind Modulith API
+  version: 1.0.0
+# servers:
+#   - url: 'http://localhost:8080/api/v1'
+#     description: Local Server
+
+tags:
+  - name: Product
+    description: Performs CRUD operations for products
+  - name: Category
+    description: Perforns CRUD operations for categories
+paths:
+  /products:
+    get:
+      summary: Returns a list of products
+      description: Returns a list of products
+      operationId: getProducts
+      tags:
+        - Product
+      parameters:
+        - name: searchName
+          in: query
+          description: Filter products by their titles or partial match
+          required: false
+          schema:
+            type: string
+        - name: supplierId
+          in: query
+          description: Filter products by supplier id
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: categoryId
+          in: query
+          description: Filter products by category id
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: minPrice
+          in: query
+          description: Filter products by minimum price
+          required: false
+          schema:
+            type: number
+            format: float
+        - name: maxPrice
+          in: query
+          description: Filter products by maximum price
+          required: false
+          schema:
+            type: number
+            format: float
+        - name: page
+          in: query
+          description: Pagination
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: limit #todo externalise this part
+          in: query
+          description: Page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 12
+        - name: sort
+          in: query
+          description: Sort by this field
+          required: false
+          schema:
+            type: string
+            enum: [name, price, supplier, category]
+            default: name
+        - name: direction
+          in: query
+          description: Sorting direction
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+      responses:
+        '200':
+          description: List of matching product results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Add a product to the database
+      description: Add a product to the database
+      operationId: addProduct
+      tags:
+        - Product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product' #todo change to surigate key
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /categories:
+    get:
+      summary: Returns a list of categories
+      description: Returns a list of categories
+      operationId: getCategories
+      tags:
+        - Category
+      parameters:
+        - name: categoryId
+          in: query
+          description: Filter products by categoryId
+          required: false
+          schema:
+            type: string
+        - name: categoryName
+          in: query
+          description: Filter products by categoryName
+          required: false
+          schema:
+            type: string
+
+        - name: limit #todo externalise this part
+          in: query
+          description: Page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 12
+        - name: sort
+          in: query
+          description: Sort by this field
+          required: false
+          schema:
+            type: string
+            enum: [name, price, supplier, category]
+            default: name
+        - name: direction
+          in: query
+          description: Sorting direction
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+      responses:
+        '200':
+          description:
+            List of matching category results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+
+
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+        supplierId:
+          type: integer
+          format: int32
+        category:
+          $ref: '#/components/schemas/Category'
+        unit:
+          type: string
+        price:
+          type: number
+          format: float
+    Category:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int32
+        categoryName:
+          type: string
+        description:
+          type: string
+
+
+
+
+    # /products/{id}:
+
+    # /orders:
+
+    # /orders/{id}:
+
+  # /shippers:
+
+  # /shippers/{id}:
+
+  # /employees:
+
+  # /employees/{id}:
+
+  # /customer
+
+  # /customer/{id}:
