@@ -5,8 +5,8 @@ import { Label } from '@/components/ui/label';
 import { Search } from 'lucide-react';
 
 export const ProductSearchForm = ({ onSearch, placeholder }) => {
-  const [productKey, setProductkey] = useState(null);
-  const [productName, setProductName] = useState(null);
+  const [productKey, setProductkey] = useState('');
+  const [productName, setProductName] = useState('');
 //   const [localError, setLocalError] = useState(null);
 //   const { lastSearches } = useSearchContext();
 

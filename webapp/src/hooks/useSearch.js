@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { api } from '@/services/api';
-// import { validateSearchQuery } from '@/utils/validation';
+// import { api } from '@/services/api';
+import { productsService } from '@/services/productsService';
 
 export const useSearch = (endpoint) => {
   const [results, setResults] = useState([]);
@@ -19,7 +19,7 @@ export const useSearch = (endpoint) => {
     setError(null);
     
     try {
-      const data = await api.search(endpoint, query);
+      const data = await productsService.searchProducts(null); //api.search(endpoint, query);
       setResults(data);
     } catch (err) {
       setError(err.message);
