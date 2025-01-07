@@ -2,10 +2,9 @@ package en93.sample.northwind_modulith.webapp.products;
 
 
 import en93.sample.northwind_modulith.generated.webapp.api.ProductsApi;
+import en93.sample.northwind_modulith.generated.webapp.model.Category;
 import en93.sample.northwind_modulith.generated.webapp.model.Product;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,17 +12,42 @@ import java.util.List;
 @RestController
 public class ProductsController implements ProductsApi {
 
-    private ProductsService productsService;
+    private final ProductsService productsService;
+
+    public ProductsController(ProductsService productsService) {
+        this.productsService = productsService;
+    }
 
     @Override
-    @PostMapping
     public ResponseEntity<Product> addProduct(Product product) {
         return null;
     }
 
     @Override
-    @GetMapping
-    public ResponseEntity<List<Product>> getProducts(String searchName, Integer supplierId, Integer categoryId, Float minPrice, Float maxPrice, Integer page, Integer limit, String sort, String direction) {
-        return productsService.getProducts(searchName, supplierId, categoryId, minPrice, maxPrice, page, limit, sort, direction);
+    public ResponseEntity<List<Product>> getProducts(String productKey, String searchName) {
+        Category sampleCategory = new Category();
+        sampleCategory.setCategoryId(1);
+        sampleCategory.setDescription("Category description");
+        sampleCategory.setCategoryName("Category name");
+
+        Product sampleProduct = new Product();
+        sampleProduct.setCategory(sampleCategory);
+        sampleProduct.setName("prod1");
+        sampleProduct.setDescription("desc1");
+        sampleProduct.setPrice(5f);
+        sampleProduct.setSupplierId(2);
+        sampleProduct.setProductKey("key");
+        sampleProduct.setUnit("shelf");
+
+        Product sampleProduct2 = new Product();
+        sampleProduct2.setCategory(sampleCategory);
+        sampleProduct2.setName("test");
+        sampleProduct2.setDescription("desc2");
+        sampleProduct2.setPrice(7f);
+        sampleProduct2.setSupplierId(2);
+        sampleProduct2.setProductKey("key2");
+        sampleProduct2.setUnit("box");
+
+        return ResponseEntity.ok(List.of(sampleProduct, sampleProduct2));
     }
 }

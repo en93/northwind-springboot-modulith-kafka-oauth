@@ -1,4 +1,4 @@
-package en93.sample.northwind_modulith.config;
+package en93.sample.northwind_modulith.webapp.config;
 
 
 import org.springframework.context.annotation.Configuration;
