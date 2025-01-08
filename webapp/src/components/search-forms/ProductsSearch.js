@@ -20,7 +20,7 @@ export const ProductSearchForm = ({ onSearch, placeholder }) => {
     // }
     
     // setLocalError(null);
-    onSearch(productKey);
+    onSearch({productKey,productName});
   };
 
   return (

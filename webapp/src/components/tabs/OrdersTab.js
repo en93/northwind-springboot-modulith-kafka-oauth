@@ -3,11 +3,10 @@ import { ProductResultsList } from '@/components/results-lists/ProductResultsLis
 import { LoadingSpinner } from '@/components/layout/LoadingSpinner';
 import { useSearch } from '@/hooks/useSearch';
 import { API_CONFIG } from '@/utils/constants';
+import { ordersService } from '@/services/ordersService';
 
 export const OrdersTab = () => {
-    //Need to define this first
-  const { results, isLoading, error, handleSearch } = useSearch(API_CONFIG.ENDPOINTS.PRODUCTS);
-
+  const { results, isLoading, error, handleSearch } = useSearch(ordersService.getOrders);
   return (
     <div className="space-y-4">
       <ProductSearchForm

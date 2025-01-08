@@ -1,8 +1,6 @@
 import { useState } from 'react';
-// import { api } from '@/services/api';
-import { productsService } from '@/services/productsService';
 
-export const useSearch = (endpoint) => {
+export const useSearch = (searchApi) => {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,13 +12,12 @@ export const useSearch = (endpoint) => {
     //   setError(validation.error);
     //   return;
     // }
-
     setIsLoading(true);
     setError(null);
     
     try {
-      const data = await productsService.searchProducts(null); //api.search(endpoint, query);
-      setResults(data);
+      const data = await searchApi(query);
+      setResults(data.body);
     } catch (err) {
       setError(err.message);
       setResults([]);

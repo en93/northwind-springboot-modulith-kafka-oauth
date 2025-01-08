@@ -11,15 +11,27 @@ export const ProductResultsList = ({ items }) => {
 
   return (
     <div className="space-y-2">
-      {items.map((item) => (
-        <Card key={item.id}>
+      {items.map((product) => (
+        <Card key={product.productKey}>
           <CardContent className="p-4">
-            <h3 className="font-medium">{item.name || item.companyName}</h3>
-            {item.description && (
-              <p className="text-sm text-gray-600">{item.description}</p>
+            <h3 className="font-medium">{product.name}</h3>
+            {product.productKey && (
+              <p className="text-sm text-gray-600">Key: {product.productKey}</p>
             )}
-            {item.contactName && (
-              <p className="text-sm text-gray-600">Contact: {item.contactName}</p>
+            {product.description && (
+              <p className="text-sm text-gray-600">Description: {product.description}</p>
+            )}
+            {product.supplierId && (
+              <p className="text-sm text-gray-600">SupplierId: {product.supplierId}</p>
+            )}
+            {product?.category?.categoryName && (
+              <p className="text-sm text-gray-600">Category: {product.category.categoryName}</p>
+            )}
+            {product.unit && (
+              <p className="text-sm text-gray-600">Unit: {product.unit}</p>
+            )}
+            {product.price && (
+              <p className="text-sm text-gray-600">Price: ${product.price}</p>
             )}
           </CardContent>
         </Card>
