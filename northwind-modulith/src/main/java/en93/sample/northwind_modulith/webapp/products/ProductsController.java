@@ -18,13 +18,13 @@ public class ProductsController implements ProductsApi {
         this.productsService = productsService;
     }
 
-    @Override
-    public ResponseEntity<Product> addProduct(Product product) {
-        return null;
-    }
+//    @Override
+//    public ResponseEntity<Product> addProduct(Product product) {
+//        return null;
+//    }
 
     @Override
-    public ResponseEntity<List<Product>> getProducts(String productKey, String searchName) {
+    public ResponseEntity<List<Product>> getProducts(String productKey, String searchProductName) {
         Category sampleCategory = new Category();
         sampleCategory.setCategoryId(1);
         sampleCategory.setDescription("Category description");
@@ -48,6 +48,15 @@ public class ProductsController implements ProductsApi {
         sampleProduct2.setProductKey("key2");
         sampleProduct2.setUnit("box");
 
-        return ResponseEntity.ok(List.of(sampleProduct, sampleProduct2));
+        Product sampleProduct3 = new Product();
+        sampleProduct3.setCategory(null);
+        sampleProduct3.setName("test");
+        sampleProduct3.setDescription("desc2");
+        sampleProduct3.setPrice(7f);
+        sampleProduct3.setSupplierId(2);
+        sampleProduct3.setProductKey("key3");
+        sampleProduct3.setUnit("box");
+
+        return ResponseEntity.ok(List.of(sampleProduct, sampleProduct2, sampleProduct3));
     }
 }
