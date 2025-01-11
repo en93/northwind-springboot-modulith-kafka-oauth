@@ -40,13 +40,18 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+<!--			<version>${postgresql.version}</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.17.0</version>
 		</dependency>
 <!--		<dependency>-->
 <!--			<groupId>io.github.openfeign</groupId>-->
@@ -235,7 +240,12 @@
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
-			<version>3.19.7</version>
+			<version>3.19.16</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jooq</groupId>
+			<artifactId>jooq-codegen-maven</artifactId>
+			<version>3.19.16</version>
 		</dependency>
 	</dependencies>
 <!--	<dependencyManagement>-->
@@ -284,6 +294,69 @@
 								<skipDefaultInterface>true</skipDefaultInterface>
 								<interfaceOnly>true</interfaceOnly>
 							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--Need to run explicitly, to avoid chicken and egg problem after changes		-->
+			<!--To use run command to update project src: "mvn jooq-codegen:generate@generate-jooq-sources" -->
+			<plugin>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen-maven</artifactId>
+				<version>3.19.16</version>
+				<executions>
+					<execution>
+						<id>generate-jooq-sources</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<phase>none</phase>
+						<configuration>
+							<jdbc>
+								<driver>org.postgresql.Driver</driver>
+								<url>jdbc:postgresql://localhost:5432/northwind</url>
+								<user>postgres</user>
+								<password>password</password>
+							</jdbc>
+							<generator>
+								<database>
+									<name>org.jooq.meta.postgres.PostgresDatabase</name>
+									<excludes>
+										flyway_schema_history |
+										spatial_ref_sys |
+										.*\.geography_.* |
+										.*\.geometry_.*
+									</excludes>
+									<inputSchema>public</inputSchema>
+								</database>
+								<target>
+									<packageName>en93.sample.northwind_modulith.webapp.generated.jooq</packageName>
+									<directory>src/main/java</directory>
+								</target>
+								<generate>
+									<deprecated>false</deprecated>
+									<records>true</records>
+									<immutablePojos>true</immutablePojos>
+									<fluentSetters>true</fluentSetters>
+								</generate>
+								<strategy>
+									<matchers>
+										<tables>
+											<table>
+												<pojoClass>
+													<transform>PASCAL</transform>
+													<expression>$0_Entity</expression>
+												</pojoClass>
+												<tableClass>
+													<transform>PASCAL</transform>
+													<expression>$0_Table</expression>
+												</tableClass>
+											</table>
+										</tables>
+									</matchers>
+								</strategy>
+							</generator>
 						</configuration>
 					</execution>
 				</executions>
