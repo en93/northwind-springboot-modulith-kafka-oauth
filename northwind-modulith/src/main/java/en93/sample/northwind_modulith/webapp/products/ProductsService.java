@@ -1,26 +1,24 @@
 package en93.sample.northwind_modulith.webapp.products;
 
-import en93.sample.northwind_modulith.generated.webapp.model.Product;
-import org.springframework.http.ResponseEntity;
+import en93.sample.northwind_modulith.generated.webapp.model.ProductDTO;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductsService {
-    private final ProductsRepository repository;
+    private final ProductsRepository productsRepository;
 
-    public ProductsService(ProductsRepository repository) {
-        this.repository = repository;
+    public ProductsService(ProductsRepository productsRepository) {
+        this.productsRepository = productsRepository;
     }
 
-    protected List<Product> getProducts(String productKey, String searchProductName) {
-        return repository.findProducts(productKey, searchProductName).stream()
+    protected List<ProductDTO> getProducts(String productKey, String searchProductName) {
+        return productsRepository.findProducts(productKey, searchProductName).stream()
                 .map(entity -> {
                     //Is there an easier way to map? Externalise to own lib
-                    final Product product = new Product();
+                    final var product = new ProductDTO();
                     product.setProductKey("" + entity.getProductid());
                     product.setSupplierId(entity.getSupplierid());
                     product.setUnit(entity.getUnit());

@@ -1,7 +1,7 @@
 package en93.sample.northwind_modulith.webapp.orders;
 
 import en93.sample.northwind_modulith.generated.webapp.api.OrdersApi;
-import en93.sample.northwind_modulith.generated.webapp.model.Order;
+import en93.sample.northwind_modulith.generated.webapp.model.OrderDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +17,7 @@ public class OrdersController implements OrdersApi {
     }
 
     @Override
-    public ResponseEntity<List<Order>> getOrders(String orderKey, String customerKey) {
-        return null;
+    public ResponseEntity<List<OrderDTO>> getOrders(String orderKey, String customerKey) {
+        return ResponseEntity.ok(ordersService.getOrders(orderKey, customerKey));
     }
 }

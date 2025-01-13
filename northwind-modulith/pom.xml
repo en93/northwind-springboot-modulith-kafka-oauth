@@ -288,6 +288,7 @@
 							<modelPackage>${project.groupId}.${project.artifactId}.generated.webapp.model</modelPackage>
 							<addCompileSourceRoot>true</addCompileSourceRoot>
 							<generateSupportingFiles>true</generateSupportingFiles>
+							<modelNameSuffix>DTO</modelNameSuffix>
 							<configOptions>
 								<serializableModel>true</serializableModel>
 								<dateLibrary>java8</dateLibrary>

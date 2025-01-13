@@ -1,7 +1,7 @@
 package en93.sample.northwind_modulith.webapp.customers;
 
 import en93.sample.northwind_modulith.generated.webapp.api.CustomerApi;
-import en93.sample.northwind_modulith.generated.webapp.model.Supplier;
+import en93.sample.northwind_modulith.generated.webapp.model.CustomerDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +17,7 @@ public class CustomersController implements CustomerApi {
     }
 
     @Override
-    public ResponseEntity<List<Supplier>> getCustomers(String supplierKey, String searchSupplierName) {
+    public ResponseEntity<List<CustomerDTO>> getCustomers(String supplierKey, String searchSupplierName) {
         return null;
     }
 }

@@ -1,7 +1,6 @@
 package en93.sample.northwind_modulith.webapp.products;
 
 import en93.sample.northwind_modulith.webapp.generated.jooq.Tables;
-import en93.sample.northwind_modulith.webapp.generated.jooq.tables.ProductsTable;
 import en93.sample.northwind_modulith.webapp.generated.jooq.tables.pojos.ProductsEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.DSLContext;
