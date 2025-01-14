@@ -180,21 +180,21 @@ paths:
       tags:
         - Supplier
       parameters:
-        - name: customerKey
+        - name: supplierKey
           in: query
-          description: Key for the customer
+          description: Key for the supplier
           required: false
           schema:
             type: string
-        - name: searchCustomerName
+        - name: searchSupplierName
           in: query
-          description: Search for a customer by name
+          description: Search for a supplier by name
           required: false
           schema:
             type: string
       responses:
         '200':
-          description: List of matching customer results
+          description: List of matching supplier results
           content:
             application/json:
               schema:
@@ -216,21 +216,21 @@ paths:
       tags:
         - Customer
       parameters:
-        - name: supplierKey
+        - name: customerKey
           in: query
-          description: Key for the supplier
+          description: Key for the customer
           required: false
           schema:
             type: string
-        - name: searchSupplierName
+        - name: searchCustomerName
           in: query
-          description: Search for a supplier by name
+          description: Search for a customer by name
           required: false
           schema:
             type: string
       responses:
         '200':
-          description: List of matching supplier results
+          description: List of matching customer results
           content:
             application/json:
               schema:

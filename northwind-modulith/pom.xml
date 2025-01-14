@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>en93.sample</groupId>
-	<artifactId>northwind-modulith</artifactId>
+	<artifactId>northwindmodulith</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Northwind Modulith</name>
 	<description>Project for exploring different technologies across the server space</description>
@@ -332,7 +332,7 @@
 									<inputSchema>public</inputSchema>
 								</database>
 								<target>
-									<packageName>en93.sample.northwind_modulith.webapp.generated.jooq</packageName>
+									<packageName>en93.sample.northwindmodulith.webapp.generated.jooq</packageName>
 									<directory>src/main/java</directory>
 								</target>
 								<generate>
