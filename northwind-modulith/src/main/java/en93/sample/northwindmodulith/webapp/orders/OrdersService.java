@@ -2,6 +2,7 @@ package en93.sample.northwindmodulith.webapp.orders;
 
 import en93.sample.northwindmodulith.generated.webapp.model.OrderDTO;
 import en93.sample.northwindmodulith.generated.jooq.tables.pojos.OrdersEntity;
+import en93.sample.northwindmodulith.generated.webapp.model.ShipperDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -23,7 +24,7 @@ public class OrdersService {
 //                    dto.setOrderDate(entity.getOrderdate());//todo change to use local date time on api layer
                     dto.setOrderDate(null);
                     dto.setOrderKey(""+entity.getOrderid());
-                    dto.setShipmentId(""+entity.getShipperid());
+                    dto.setShipper(new ShipperDTO());
                     //todo explore jooq and foreign key relationships, one to many
                     dto.setOrderDetails(Collections.emptyList());
                     return dto;

@@ -316,7 +316,7 @@
 						<configuration>
 							<jdbc>
 								<driver>org.postgresql.Driver</driver>
-								<url>jdbc:postgresql://localhost:5432/northwind</url>
+								<url>jdbc:postgresql://localhost:5435/northwind</url>
 								<user>postgres</user>
 								<password>password</password>
 							</jdbc>

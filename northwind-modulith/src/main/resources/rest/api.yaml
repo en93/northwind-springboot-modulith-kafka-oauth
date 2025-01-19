@@ -153,7 +153,7 @@ paths:
             type: string
         - name: customerKey
           in: query
-          description: Filter orders by customer
+          description: Filter orders by order
           required: false
           schema:
             type: string
@@ -323,17 +323,13 @@ components:
         description:
           type: string
           example: 'Large notepad'
-        supplierId:
-          type: integer
-          format: int32
-          example: 'todo make into own object'
+        supplier:
+          $ref: '#/components/schemas/Supplier'
         category:
           $ref: '#/components/schemas/Category'
-          # type: integer
-          # format: int32
         unit:
           type: string
-          example: 'Pack of five'
+          example: 'Pack of 10'
         price:
           type: number
           format: float
@@ -348,12 +344,34 @@ components:
         orderDate:
           type: string
           format: date-time
-        shipmentId:
-          type: string
+        shipper:
+          $ref: '#/components/schemas/Shipper'
         orderDetails:
           type: array
           items:
             $ref: '#/components/schemas/OrderDetail'
+
+    Shipper:
+      type: object
+      properties:
+        shipperId:
+          type: string
+          example: 'SHPR-001'
+        shipperName:
+          type: string
+          example: 'Logistics North'
+        shipperPhone:
+          type: string
+          example: '09123456'
+
+        #TODO create new module and schema for this
+        # Shipment:
+        #   type: object
+        #   properties:
+        #     shipmentKey:
+        #       type: string
+        #       example: 'SHP-001'
+
 
     OrderDetail:
       type: object
@@ -368,29 +386,17 @@ components:
       properties:
         supplierKey:
           type: string
-          example: 'SUP-001'
+          example: 'SPLR-001'
         supplierName:
           type: string
           example: 'Sporting Supplier store'
         addressDetails:
           $ref: '#/components/schemas/AddressDetails'
-        #   type: string
-        #   example: '1 Queen Street'
-        # city:
-        #   type: string
-        #   example: 'Auckland'
-        # postalCode:
-        #   type: string
-        #   example: '1060'
-        # country:
-        #   type: string
-        #   example: 'New Zealand'
-        phone:
+        supplierPhone:
           type: string
           example: '0912345678'
 
     Customer:
-      # Can I reuse an address as its own type?
       type: object
       properties:
         customerKey:
@@ -418,8 +424,6 @@ components:
           type: string
           example: 'New Zealand'
 
-
-
     Category:
       type: object
       properties:
@@ -430,24 +434,3 @@ components:
           type: string
         description:
           type: string
-
-
-
-
-    # /products/{id}:
-
-    # /orders:
-
-    # /orders/{id}:
-
-  # /shippers:
-
-  # /shippers/{id}:
-
-  # /employees:
-
-  # /employees/{id}:
-
-  # /customer
-
-  # /customer/{id}:

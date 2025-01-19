@@ -23,7 +23,7 @@ public class SuppliersService {
                     var dto = new SupplierDTO();
                     dto.setSupplierKey(""+entity.getSupplierid());
                     dto.setSupplierName(entity.getSuppliername());
-                    dto.setPhone(entity.getPhone());
+                    dto.setSupplierPhone(entity.getPhone());
 
                     var addressDetailsDTO = new AddressDetailsDTO();
                     addressDetailsDTO.setAddress(entity.getAddress());
