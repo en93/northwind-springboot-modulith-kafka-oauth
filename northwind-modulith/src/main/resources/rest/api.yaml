@@ -38,6 +38,12 @@ paths:
           required: false
           schema:
             type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        #        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/SortDirection'
+
+
         # - name: supplierId
         #   in: query
         #   description: Filter products by supplier id
@@ -103,9 +109,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationData'
             application/xml:
               schema:
                 type: array
@@ -157,15 +168,24 @@ paths:
           required: false
           schema:
             type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        #        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/SortDirection'
       responses:
         '200':
           description: List of matching order results
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Order'
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationData'
             application/xml:
               schema:
                 type: array
@@ -192,15 +212,24 @@ paths:
           required: false
           schema:
             type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        #        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/SortDirection'
       responses:
         '200':
           description: List of matching supplier results
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Supplier'
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Supplier'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationData'
             application/xml:
               schema:
                 type: array
@@ -228,15 +257,24 @@ paths:
           required: false
           schema:
             type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        #        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/SortDirection'
       responses:
         '200':
           description: List of matching customer results
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Customer'
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Customer'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationData'
             application/xml:
               schema:
                 type: array
@@ -309,8 +347,49 @@ paths:
 
 
 components:
-  schemas:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum items per page
+      required: false
+      schema:
+        type: integer
+        default: 10
+        example: 10
+        minimum: 1
+        maximum: 100
+    Offset:
+      name: offset
+      in: query
+      description: Count of results to skip
+      required: false
+      schema:
+        type: integer
+        example: 0
+        default: 0
+        minimum: 0
+    #    SortBy:
+    #      name: sortBy
+    #      in: query
+    #      description: Field to sort by (e.g., name, createdAt).
+    #      required: false
+    #      schema:
+    #        type: string
+    #        enum: [ name, email, createdAt ]
+    #        default: name
+    SortDirection:
+      name: sortDirection
+      in: query
+      description: Direction of results
+      required: false
+      schema:
+        type: string
+        enum: [ asc, desc ]
+        default: asc
+        example: 'asc'
 
+  schemas:
     Product:
       type: object
       properties:
@@ -320,9 +399,9 @@ components:
         name:
           type: string
           example: 'Blink Notepad'
-        description:
-          type: string
-          example: 'Large notepad'
+#        description:
+#          type: string
+#          example: 'Large notepad'
         supplier:
           $ref: '#/components/schemas/Supplier'
         category:
@@ -434,3 +513,23 @@ components:
           type: string
         description:
           type: string
+
+    PaginationData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Count of all matching results in dataset
+          example: '190'
+        limit:
+          type: integer
+          description: Maximum items per page
+          example: '10'
+        offset:
+          type: integer
+          example: '0'
+          description: Count of results to skip
+        pageCount:
+          type: integer
+          example: '5'
+          description: Total number of pages available.
