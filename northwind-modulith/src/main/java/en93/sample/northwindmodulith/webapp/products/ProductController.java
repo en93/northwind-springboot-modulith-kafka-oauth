@@ -2,31 +2,33 @@ package en93.sample.northwindmodulith.webapp.products;
 
 
 import en93.sample.northwindmodulith.generated.webapp.api.ProductsApi;
-import en93.sample.northwindmodulith.generated.webapp.model.ProductDTO;
+import en93.sample.northwindmodulith.generated.webapp.model.GetProducts200ResponseDTO;
+import en93.sample.northwindmodulith.webapp.utils.PaginationUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class ProductController implements ProductsApi {
 
     private final ProductService productService;
+    private final PaginationUtil paginationUtil;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, PaginationUtil paginationUtil) {
         this.productService = productService;
+        this.paginationUtil = paginationUtil;
     }
 
-//    @Override
-//    public ResponseEntity<Product> addProduct(Product product) {
-//        return null;
-//    }
-
     @Override
-    public ResponseEntity<List<ProductDTO>> getProducts(String productKey, String searchProductName) {
-        List<ProductDTO> products = productService.getProducts(productKey, searchProductName);
+    public ResponseEntity<GetProducts200ResponseDTO> getProducts(String productKey, String searchProductName, Integer limit, Integer offset, String sortDirection) {
 
-        //todo error handling
-        return ResponseEntity.ok(products);
+        var response = new GetProducts200ResponseDTO();
+
+        var products = productService.getProducts(productKey, searchProductName, limit, offset, sortDirection);
+        response.setData(products);
+
+        var pagination = paginationUtil.buildPaginationResponse(limit, offset);
+        response.setPagination(pagination);
+
+        return ResponseEntity.ok(response);
     }
 }

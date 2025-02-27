@@ -3,6 +3,7 @@ package en93.sample.northwindmodulith.webapp.suppliers;
 import en93.sample.northwindmodulith.entities.SupplierEntity;
 import en93.sample.northwindmodulith.generated.webapp.model.SupplierDTO;
 import en93.sample.northwindmodulith.mappers.SupplierMapper;
+import en93.sample.northwindmodulith.webapp.utils.PaginationUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -12,14 +13,18 @@ import java.util.List;
 public class SupplierService {
 
     private final SupplierRepository supplierRepository;
+    private final PaginationUtil paginationUtil;
 
-    public SupplierService(SupplierRepository supplierRepository) {
+    public SupplierService(SupplierRepository supplierRepository, PaginationUtil paginationUtil) {
         this.supplierRepository = supplierRepository;
+        this.paginationUtil = paginationUtil;
     }
 
-    public List<SupplierDTO> getSuppliers(String supplierKey, String searchSupplierName) {
+    public List<SupplierDTO> getSuppliers(String supplierKey, String searchSupplierName, Integer limit, Integer offset, String sortDirection) {
         var key = supplierKey != null ? Integer.valueOf(supplierKey) : null;
-        var supplierEntities = supplierRepository.searchSuppliers(key);
+        var pageable = paginationUtil.buildPageRequest(limit, offset);
+
+        var supplierEntities = supplierRepository.searchSuppliers(key, pageable);
         return supplierEntities.stream()
                 .map(SupplierMapper.INSTANCE::toDTO)
                 .toList();
