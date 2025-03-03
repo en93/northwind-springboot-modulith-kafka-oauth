@@ -3,6 +3,8 @@ package en93.sample.northwindmodulith.webapp.products;
 
 import en93.sample.northwindmodulith.generated.webapp.api.ProductsApi;
 import en93.sample.northwindmodulith.generated.webapp.model.GetProducts200ResponseDTO;
+import en93.sample.northwindmodulith.generated.webapp.model.ProductSortEnumDTO;
+import en93.sample.northwindmodulith.generated.webapp.model.SortDirectionEnumDTO;
 import en93.sample.northwindmodulith.webapp.utils.PaginationUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,16 +21,17 @@ public class ProductController implements ProductsApi {
     }
 
     @Override
-    public ResponseEntity<GetProducts200ResponseDTO> getProducts(String productKey, String searchProductName, Integer limit, Integer offset, String sortDirection) {
+    public ResponseEntity<GetProducts200ResponseDTO> getProducts(String productKey, String searchProductName, Integer limit, Integer offset, ProductSortEnumDTO sortField, SortDirectionEnumDTO sortDirection) {
 
         var response = new GetProducts200ResponseDTO();
 
-        var products = productService.getProducts(productKey, searchProductName, limit, offset, sortDirection);
-        response.setData(products);
+        var products = productService.getProducts(productKey, searchProductName, limit, offset, sortDirection, sortField);
+        response.setData(products.getContent());
 
-        var pagination = paginationUtil.buildPaginationResponse(limit, offset);
+        var pagination = paginationUtil.buildPaginationResponse(products);
         response.setPagination(pagination);
 
         return ResponseEntity.ok(response);
     }
+
 }

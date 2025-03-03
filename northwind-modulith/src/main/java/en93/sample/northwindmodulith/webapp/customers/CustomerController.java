@@ -1,7 +1,9 @@
 package en93.sample.northwindmodulith.webapp.customers;
 
 import en93.sample.northwindmodulith.generated.webapp.api.CustomerApi;
+import en93.sample.northwindmodulith.generated.webapp.model.CustomerSortEnumDTO;
 import en93.sample.northwindmodulith.generated.webapp.model.GetCustomers200ResponseDTO;
+import en93.sample.northwindmodulith.generated.webapp.model.SortDirectionEnumDTO;
 import en93.sample.northwindmodulith.webapp.utils.PaginationUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,14 +20,13 @@ public class CustomerController implements CustomerApi {
     }
 
     @Override
-    public ResponseEntity<GetCustomers200ResponseDTO> getCustomers(String customerKey, String searchCustomerName, Integer limit, Integer offset, String sortDirection) {
+    public ResponseEntity<GetCustomers200ResponseDTO> getCustomers(String customerKey, String searchCustomerName, Integer limit, Integer offset, CustomerSortEnumDTO sortField, SortDirectionEnumDTO sortDirection) {
+        var customers = customerService.getCustomers(customerKey, searchCustomerName, limit, offset, sortDirection, sortField);
 
         var response = new GetCustomers200ResponseDTO();
+        response.setData(customers.getContent());
 
-        var customers = customerService.getCustomers(customerKey, searchCustomerName, limit, offset, sortDirection);
-        response.setData(customers);
-
-        var pagination = paginationUtil.buildPaginationResponse(limit, offset);
+        var pagination = paginationUtil.buildPaginationResponse(customers);
         response.setPagination(pagination);
 
         return ResponseEntity.ok(response);

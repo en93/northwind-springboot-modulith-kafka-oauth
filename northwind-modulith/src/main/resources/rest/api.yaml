@@ -32,7 +32,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: searchOrderName
+        - name: searchProductName
           in: query
           description: Filter products by their titles or partial match
           required: false
@@ -40,69 +40,9 @@ paths:
             type: string
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
-        #        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/ProductSortField'
         - $ref: '#/components/parameters/SortDirection'
 
-
-        # - name: supplierId
-        #   in: query
-        #   description: Filter products by supplier id
-        #   required: false
-        #   schema:
-        #     type: integer
-        #     format: int32
-        # - name: categoryId
-        #   in: query
-        #   description: Filter products by category id
-        #   required: false
-        #   schema:
-        #     type: integer
-        #     format: int32
-        # - name: minPrice
-        #   in: query
-        #   description: Filter products by minimum price
-        #   required: false
-        #   schema:
-        #     type: number
-        #     format: float
-        # - name: maxPrice
-        #   in: query
-        #   description: Filter products by maximum price
-        #   required: false
-        #   schema:
-        #     type: number
-        #     format: float
-        # - name: page
-        #   in: query
-        #   description: Pagination
-        #   required: false
-        #   schema:
-        #     type: integer
-        #     format: int32
-        # - name: limit #todo externalise this part
-        #   in: query
-        #   description: Page
-        #   required: false
-        #   schema:
-        #     type: integer
-        #     format: int32
-        #     default: 12
-        # - name: sort
-        #   in: query
-        #   description: Sort by this field
-        #   required: false
-        #   schema:
-        #     type: string
-        #     enum: [name, price, supplier, category]
-        #     default: name
-        # - name: direction
-        #   in: query
-        #   description: Sorting direction
-        #   required: false
-        #   schema:
-        #     type: string
-        #     enum: [asc, desc]
-        #     default: asc
       responses:
         '200':
           description: List of matching product results
@@ -122,31 +62,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-    # post:
-    #   summary: Add a product to the database
-    #   description: Add a product to the database
-    #   operationId: addProduct
-    #   tags:
-    #     - Product
-    #   requestBody:
-    #     required: true
-    #     content:
-    #       application/json:
-    #         schema:
-    #           $ref: '#/components/schemas/Product'
-    #       application/xml:
-    #         schema:
-    #           $ref: '#/components/schemas/Product'
-    #   responses:
-    #     '201':
-    #       description: Product added
-    #       content:
-    #         application/json:
-    #           schema:
-    #             $ref: '#/components/schemas/Product' #todo change to surigate key
-    #         application/xml:
-    #           schema:
-    #             $ref: '#/components/schemas/Product'
 
   /orders:
     get:
@@ -170,7 +85,7 @@ paths:
             type: string
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
-        #        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/OrderSortField'
         - $ref: '#/components/parameters/SortDirection'
       responses:
         '200':
@@ -214,7 +129,7 @@ paths:
             type: string
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
-        #        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/SupplierSortField'
         - $ref: '#/components/parameters/SortDirection'
       responses:
         '200':
@@ -259,7 +174,7 @@ paths:
             type: string
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
-        #        - $ref: '#/components/parameters/SortBy'
+        - $ref: '#/components/parameters/CustomerSortField'
         - $ref: '#/components/parameters/SortDirection'
       responses:
         '200':
@@ -280,71 +195,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer'
-
-
-
-  # /categories:
-  #   get:
-  #     summary: Returns a list of categories
-  #     description: Returns a list of categories
-  #     operationId: getCategories
-  #     tags:
-  #       - Category
-  #     parameters:
-  #       - name: categoryId
-  #         in: query
-  #         description: Filter products by categoryId
-  #         required: false
-  #         schema:
-  #           type: string
-  #       - name: categoryName
-  #         in: query
-  #         description: Filter products by categoryName
-  #         required: false
-  #         schema:
-  #           type: string
-
-  #       - name: limit #todo externalise this part
-  #         in: query
-  #         description: Page
-  #         required: false
-  #         schema:
-  #           type: integer
-  #           format: int32
-  #           default: 12
-  #       - name: sort
-  #         in: query
-  #         description: Sort by this field
-  #         required: false
-  #         schema:
-  #           type: string
-  #           enum: [name, price, supplier, category]
-  #           default: name
-  #       - name: direction
-  #         in: query
-  #         description: Sorting direction
-  #         required: false
-  #         schema:
-  #           type: string
-  #           enum: [asc, desc]
-  #           default: asc
-  #     responses:
-  #       '200':
-  #         description:
-  #           List of matching category results
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/Category'
-  #           application/xml:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/Category'
-
-
 
 components:
   parameters:
@@ -369,25 +219,37 @@ components:
         example: 0
         default: 0
         minimum: 0
-    #    SortBy:
-    #      name: sortBy
-    #      in: query
-    #      description: Field to sort by (e.g., name, createdAt).
-    #      required: false
-    #      schema:
-    #        type: string
-    #        enum: [ name, email, createdAt ]
-    #        default: name
     SortDirection:
       name: sortDirection
       in: query
       description: Direction of results
       required: false
       schema:
-        type: string
-        enum: [ asc, desc ]
-        default: asc
-        example: 'asc'
+        $ref: '#/components/schemas/SortDirectionEnum'
+    CustomerSortField:
+      name: customerSortField
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/CustomerSortEnum'
+    OrderSortField:
+      name: orderSortField
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/OrderSortEnum'
+    ProductSortField:
+      name: productSortField
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/ProductSortEnum'
+    SupplierSortField:
+      name: supplierSortField
+      in: query
+      required: false
+      schema:
+        $ref: '#/components/schemas/SupplierSortEnum'
 
   schemas:
     Product:
@@ -442,15 +304,6 @@ components:
         shipperPhone:
           type: string
           example: '09123456'
-
-        #TODO create new module and schema for this
-        # Shipment:
-        #   type: object
-        #   properties:
-        #     shipmentKey:
-        #       type: string
-        #       example: 'SHP-001'
-
 
     OrderDetail:
       type: object
@@ -517,15 +370,15 @@ components:
     PaginationData:
       type: object
       properties:
-        total:
+        totalElements:
           type: integer
           description: Count of all matching results in dataset
           example: '190'
-        limit:
+        size:
           type: integer
           description: Maximum items per page
           example: '10'
-        offset:
+        pageCurrent:
           type: integer
           example: '0'
           description: Count of results to skip
@@ -533,3 +386,24 @@ components:
           type: integer
           example: '5'
           description: Total number of pages available.
+
+    CustomerSortEnum:
+      type: string
+      enum: [ 'key', 'name' ]
+      default: 'key'
+    OrderSortEnum:
+      type: string
+      enum: [ 'key', 'orderdate']
+      default: 'key'
+    ProductSortEnum:
+      type: string
+      enum: [ 'key', 'name', 'price' ]
+      default: 'key'
+    SupplierSortEnum:
+      type: string
+      enum: [ 'key', 'name' ]
+      default: 'key'
+    SortDirectionEnum:
+      type: string
+      enum: [ 'asc', 'desc' ]
+      default: 'asc'
