@@ -4,14 +4,14 @@ DROP COLUMN IF EXISTS customerkey;
 
 --New surrogate key for keys exposed outside of application
 ALTER TABLE customers
-ADD COLUMN customerkey TEXT;
+ADD COLUMN customerkey varchar(50);
 
 --Set values for existing customers
 UPDATE customers
-SET customerkey = 'ORD-' || uuid_generate_v4()
+SET customerkey = 'CUST-' || uuid_generate_v4()
 WHERE customerkey IS NULL;
 
 --Require not null and unique
 ALTER TABLE customers
-ALTER COLUMN customerkey SET NOT NULL;
+ALTER COLUMN customerkey SET NOT NULL,
 ADD CONSTRAINT unique_customer_key UNIQUE (customerkey);
