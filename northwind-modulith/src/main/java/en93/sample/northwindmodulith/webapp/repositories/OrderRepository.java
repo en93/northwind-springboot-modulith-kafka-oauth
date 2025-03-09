@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Integer> {
 
-    @Query(value = "SELECT o FROM OrderEntity o " +
-            "WHERE (:orderKey IS NULL OR :orderKey = o.orderID ) " +
-            "AND (:customerKey IS NOT NULL OR :customerKey IS NULL)", nativeQuery = true)
-    Page<OrderEntity> searchOrders(String orderKey, String customerKey, Pageable pageable);
+    @Query(value = "SELECT * FROM orders o " +
+            "LEFT JOIN customers c on c.customerid = o.customerid " +
+            "WHERE (:orderKey IS NULL OR :orderKey = o.orderKey ) " +
+            "AND (:customerKey IS NULL OR :customerKey = c.customerkey) " +
+            "AND (:orderSearch IS NULL OR c.tsv_content @@ to_tsquery(:orderSearch))", nativeQuery = true)
+    Page<OrderEntity> searchOrders(String orderKey, String customerKey, String orderSearch, Pageable pageable);
 
 }
