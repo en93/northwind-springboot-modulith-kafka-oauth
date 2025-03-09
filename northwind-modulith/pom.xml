@@ -26,6 +26,14 @@
 		<tag/>
 		<url/>
 	</scm>
+	<profiles>
+		<profile>
+			<id>dev</id>
+		</profile>
+		<profile>
+			<id>docker</id>
+		</profile>
+	</profiles>
 	<properties>
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
