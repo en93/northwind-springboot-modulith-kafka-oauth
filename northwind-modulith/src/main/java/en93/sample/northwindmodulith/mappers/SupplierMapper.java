@@ -11,7 +11,7 @@ public interface SupplierMapper {
 
     SupplierMapper INSTANCE = Mappers.getMapper(SupplierMapper.class);
 
-    @Mapping(source = "supplierID", target = "supplierKey")
+    @Mapping(source = "supplierKey", target = "supplierKey")
     @Mapping(source = "supplierName", target = "supplierName")
     @Mapping(source = "address", target="addressDetails.address")
     @Mapping(source = "city", target="addressDetails.city")

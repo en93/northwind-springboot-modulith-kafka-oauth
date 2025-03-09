@@ -20,8 +20,8 @@ public class CustomerController implements CustomerApi {
     }
 
     @Override
-    public ResponseEntity<GetCustomers200ResponseDTO> getCustomers(String customerKey, String searchCustomerName, Integer limit, Integer offset, CustomerSortEnumDTO sortField, SortDirectionEnumDTO sortDirection) {
-        var customers = customerService.getCustomers(customerKey, searchCustomerName, limit, offset, sortDirection, sortField);
+    public ResponseEntity<GetCustomers200ResponseDTO> getCustomers(String customerKey, String searchCustomer, Integer limit, Integer offset, CustomerSortEnumDTO sortField, SortDirectionEnumDTO sortDirection) {
+        var customers = customerService.getCustomers(customerKey, searchCustomer, limit, offset, sortDirection, sortField);
 
         var response = new GetCustomers200ResponseDTO();
         response.setData(customers.getContent());

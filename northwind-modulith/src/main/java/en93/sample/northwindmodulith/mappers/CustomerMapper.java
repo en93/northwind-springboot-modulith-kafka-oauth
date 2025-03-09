@@ -11,7 +11,7 @@ public interface CustomerMapper {
 
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
-    @Mapping(source = "customerID", target="customerKey")
+    @Mapping(source = "customerKey", target="customerKey")
     @Mapping(source = "customerName", target = "customerName")
     @Mapping(source = "address", target="addressDetails.address")
     @Mapping(source = "city", target="addressDetails.city")

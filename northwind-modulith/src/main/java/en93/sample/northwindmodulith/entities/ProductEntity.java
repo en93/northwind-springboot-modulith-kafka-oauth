@@ -13,6 +13,8 @@ public class ProductEntity {
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     @Column(name = "productID")
     private Integer productID;
+    @Column(name = "productKey")
+    private String productKey;
     @Column(name = "productName")
     private String productName;
     @ManyToOne
@@ -29,8 +31,9 @@ public class ProductEntity {
     public ProductEntity() {
     }
 
-    public ProductEntity(Integer productID, String productName, SupplierEntity supplier, CategoryEntity category, String unit, BigDecimal price) {
+    public ProductEntity(Integer productID, String productKey, String productName, SupplierEntity supplier, CategoryEntity category, String unit, BigDecimal price) {
         this.productID = productID;
+        this.productKey = productKey;
         this.productName = productName;
         this.supplier = supplier;
         this.category = category;
@@ -86,26 +89,34 @@ public class ProductEntity {
         this.price = price;
     }
 
+    public String getProductKey() {
+        return productKey;
+    }
+
+    public void setProductKey(String productKey) {
+        this.productKey = productKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity that = (ProductEntity) o;
-        return Objects.equals(productID, that.productID) && Objects.equals(productName, that.productName) && Objects.equals(supplier, that.supplier) && Objects.equals(category, that.category) && Objects.equals(unit, that.unit) && Objects.equals(price, that.price);
+        return Objects.equals(productID, that.productID) && Objects.equals(productKey, that.productKey) && Objects.equals(productName, that.productName) && Objects.equals(supplier, that.supplier) && Objects.equals(category, that.category) && Objects.equals(unit, that.unit) && Objects.equals(price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productID, productName, supplier, category, unit, price);
+        return Objects.hash(productID, productKey, productName, supplier, category, unit, price);
     }
 
-    //todo
     @Override
     public String toString() {
-        return "ProductsEntity{" +
+        return "ProductEntity{" +
                 "productID=" + productID +
+                ", productKey='" + productKey + '\'' +
                 ", productName='" + productName + '\'' +
-                ", supplierID=" + supplier +
-                ", categoryID=" + category +
+                ", supplier=" + supplier +
+                ", category=" + category +
                 ", unit='" + unit + '\'' +
                 ", price=" + price +
                 '}';

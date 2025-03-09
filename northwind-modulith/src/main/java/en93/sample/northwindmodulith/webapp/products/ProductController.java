@@ -21,11 +21,11 @@ public class ProductController implements ProductsApi {
     }
 
     @Override
-    public ResponseEntity<GetProducts200ResponseDTO> getProducts(String productKey, String searchProductName, Integer limit, Integer offset, ProductSortEnumDTO sortField, SortDirectionEnumDTO sortDirection) {
+    public ResponseEntity<GetProducts200ResponseDTO> getProducts(String productKey, String searchProduct, Integer limit, Integer offset, ProductSortEnumDTO sortField, SortDirectionEnumDTO sortDirection) {
 
         var response = new GetProducts200ResponseDTO();
 
-        var products = productService.getProducts(productKey, searchProductName, limit, offset, sortDirection, sortField);
+        var products = productService.getProducts(productKey, searchProduct, limit, offset, sortDirection, sortField);
         response.setData(products.getContent());
 
         var pagination = paginationUtil.buildPaginationResponse(products);

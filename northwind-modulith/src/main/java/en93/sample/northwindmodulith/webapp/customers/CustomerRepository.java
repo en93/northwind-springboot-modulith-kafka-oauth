@@ -8,13 +8,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
 
-    @Query("SELECT c FROM CustomerEntity c " +
-            "WHERE :customerKey IS NULL OR :customerKey = c.customerID")
-    Page<CustomerEntity> searchCustomers(Integer customerKey, Pageable pageable);
+    @Query(value = "SELECT * FROM customers c " +
+            "WHERE (:customerKey IS NULL OR :customerKey = c.customerKey) " +
+            "AND (:searchCustomer IS NULL OR c.tsv_content @@ to_tsquery(:searchCustomer))", nativeQuery = true)
+    Page<CustomerEntity> searchCustomers(String customerKey, String searchCustomer, Pageable pageable);
 
 }

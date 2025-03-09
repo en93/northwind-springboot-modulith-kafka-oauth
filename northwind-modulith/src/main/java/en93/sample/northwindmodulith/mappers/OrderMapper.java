@@ -16,7 +16,7 @@ public interface OrderMapper {
     //todo can I move this to a component class?
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-    @Mapping(source = "orderID", target = "orderKey")
+    @Mapping(source = "orderKey", target = "orderKey")
     @Mapping(source = "orderDate", target = "orderDate")
     @Mapping(source = "shipper", target = "shipper")
     @Mapping(source = "details", target = "orderDetails")

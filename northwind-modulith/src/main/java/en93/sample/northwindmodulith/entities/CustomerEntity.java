@@ -13,6 +13,8 @@ public class CustomerEntity {
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     @Column(name = "customerID")
     private Integer customerID;
+    @Column(name = "customerKey")
+    private String customerKey;
     @Column(name = "customerName")
     private String customerName;
     @Column(name = "contactName")
@@ -26,10 +28,12 @@ public class CustomerEntity {
     @Column(name = "country")
     private String country;
 
-    public CustomerEntity() {}
+    public CustomerEntity() {
+    }
 
-    public CustomerEntity(Integer customerID, String customerName, String contactName, String address, String city, String postalCode, String country) {
+    public CustomerEntity(Integer customerID, String customerKey, String customerName, String contactName, String address, String city, String postalCode, String country) {
         this.customerID = customerID;
+        this.customerKey = customerKey;
         this.customerName = customerName;
         this.contactName = contactName;
         this.address = address;
@@ -94,22 +98,31 @@ public class CustomerEntity {
         this.country = country;
     }
 
+    public String getCustomerKey() {
+        return customerKey;
+    }
+
+    public void setCustomerKey(String customerKey) {
+        this.customerKey = customerKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         CustomerEntity that = (CustomerEntity) o;
-        return Objects.equals(customerID, that.customerID) && Objects.equals(customerName, that.customerName) && Objects.equals(contactName, that.contactName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country);
+        return Objects.equals(customerID, that.customerID) && Objects.equals(customerKey, that.customerKey) && Objects.equals(customerName, that.customerName) && Objects.equals(contactName, that.contactName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerID, customerName, contactName, address, city, postalCode, country);
+        return Objects.hash(customerID, customerKey, customerName, contactName, address, city, postalCode, country);
     }
 
     @Override
     public String toString() {
         return "CustomersEntity{" +
                 "customerID=" + customerID +
+                ", customerKey='" + customerKey + '\'' +
                 ", customerName='" + customerName + '\'' +
                 ", contactName='" + contactName + '\'' +
                 ", address='" + address + '\'' +

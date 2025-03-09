@@ -13,6 +13,8 @@ public class OrderEntity {
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     @Column(name = "orderID")
     private Integer orderID;
+    @Column(name = "orderKey")
+    private String orderKey;
     @ManyToOne
     @JoinColumn(name = "customerID")
     private CustomerEntity customer;
@@ -30,12 +32,14 @@ public class OrderEntity {
     public OrderEntity() {
     }
 
-    public OrderEntity(Integer orderID, CustomerEntity customer, EmployeeEntity employee, LocalDateTime orderDate, ShipperEntity shipper) {
+    public OrderEntity(Integer orderID, String orderKey, CustomerEntity customer, EmployeeEntity employee, LocalDateTime orderDate, ShipperEntity shipper, List<OrderDetailEntity> details) {
         this.orderID = orderID;
+        this.orderKey = orderKey;
         this.customer = customer;
         this.employee = employee;
         this.orderDate = orderDate;
         this.shipper = shipper;
+        this.details = details;
     }
 
     public Integer getOrderID() {
@@ -86,22 +90,31 @@ public class OrderEntity {
         this.details = details;
     }
 
+    public String getOrderKey() {
+        return orderKey;
+    }
+
+    public void setOrderKey(String orderKey) {
+        this.orderKey = orderKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         OrderEntity that = (OrderEntity) o;
-        return Objects.equals(orderID, that.orderID) && Objects.equals(customer, that.customer) && Objects.equals(employee, that.employee) && Objects.equals(orderDate, that.orderDate) && Objects.equals(shipper, that.shipper) && Objects.equals(details, that.details);
+        return Objects.equals(orderID, that.orderID) && Objects.equals(orderKey, that.orderKey) && Objects.equals(customer, that.customer) && Objects.equals(employee, that.employee) && Objects.equals(orderDate, that.orderDate) && Objects.equals(shipper, that.shipper) && Objects.equals(details, that.details);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderID, customer, employee, orderDate, shipper, details);
+        return Objects.hash(orderID, orderKey, customer, employee, orderDate, shipper, details);
     }
 
     @Override
     public String toString() {
         return "OrderEntity{" +
                 "orderID=" + orderID +
+                ", orderKey=" + orderKey +
                 ", customer=" + customer +
                 ", employee=" + employee +
                 ", orderDate=" + orderDate +

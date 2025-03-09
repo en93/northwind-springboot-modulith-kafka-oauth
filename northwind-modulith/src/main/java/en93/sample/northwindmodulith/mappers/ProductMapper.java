@@ -14,7 +14,7 @@ public interface ProductMapper {
 
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
-    @Mapping(source = "productID", target = "productKey")
+    @Mapping(source = "productKey", target = "productKey")
     @Mapping(source = "productName", target = "name")
 //    @Mapping(source = "?", target = "description")//todo remove?
     @Mapping(source = "supplier", target = "supplier")

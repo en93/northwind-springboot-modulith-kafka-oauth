@@ -32,7 +32,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: searchProductName
+        - name: searchProduct
           in: query
           description: Filter products by their titles or partial match
           required: false
@@ -121,7 +121,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: searchSupplierName
+        - name: searchSupplier
           in: query
           description: Search for a supplier by name
           required: false
@@ -166,7 +166,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: searchCustomerName
+        - name: searchCustomer
           in: query
           description: Search for a customer by name
           required: false
@@ -281,7 +281,7 @@ components:
       properties:
         orderKey:
           type: string
-          example: 'ORD-001'
+          example: 'ORDR-b93cb3ba-eb08-466e-ab2c-68b0ba0ac119'
         orderDate:
           type: string
           format: date-time
@@ -297,7 +297,7 @@ components:
       properties:
         shipperId:
           type: string
-          example: 'SHPR-001'
+          example: 'SHPPR-31b3c990-dd6e-4a8c-8f26-678dc8c4e644'
         shipperName:
           type: string
           example: 'Logistics North'
@@ -318,7 +318,7 @@ components:
       properties:
         supplierKey:
           type: string
-          example: 'SPLR-001'
+          example: 'SUPP-f2ab505c-1a97-4a30-9736-f5fa8a1c2eff'
         supplierName:
           type: string
           example: 'Sporting Supplier store'
@@ -333,7 +333,7 @@ components:
       properties:
         customerKey:
           type: string
-          example: 'CUST-001'
+          example: 'CUST-62827ec4-7667-4df2-b0e0-569144bfbaf0'
         customerName:
           type: string
           example: 'My mowing business'

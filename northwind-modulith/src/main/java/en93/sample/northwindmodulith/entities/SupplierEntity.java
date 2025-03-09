@@ -14,6 +14,8 @@ public class SupplierEntity {
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     @Column(name = "supplierID")
     private Integer supplierID;
+    @Column(name = "supplierKey")
+    private String supplierKey;
     @Column(name = "supplierName")
     private String supplierName;
     @Column(name = "contactName")
@@ -32,8 +34,9 @@ public class SupplierEntity {
     public SupplierEntity() {
     }
 
-    public SupplierEntity(Integer supplierID, String supplierName, String contactName, String address, String city, String postalCode, String country, String phone) {
+    public SupplierEntity(Integer supplierID, String supplierKey, String supplierName, String contactName, String address, String city, String postalCode, String country, String phone) {
         this.supplierID = supplierID;
+        this.supplierKey = supplierKey;
         this.supplierName = supplierName;
         this.contactName = contactName;
         this.address = address;
@@ -107,22 +110,31 @@ public class SupplierEntity {
         this.phone = phone;
     }
 
+    public String getSupplierKey() {
+        return supplierKey;
+    }
+
+    public void setSupplierKey(String supplierKey) {
+        this.supplierKey = supplierKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         SupplierEntity that = (SupplierEntity) o;
-        return Objects.equals(supplierID, that.supplierID) && Objects.equals(supplierName, that.supplierName) && Objects.equals(contactName, that.contactName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country) && Objects.equals(phone, that.phone);
+        return Objects.equals(supplierID, that.supplierID) && Objects.equals(supplierKey, that.supplierKey) && Objects.equals(supplierName, that.supplierName) && Objects.equals(contactName, that.contactName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country) && Objects.equals(phone, that.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(supplierID, supplierName, contactName, address, city, postalCode, country, phone);
+        return Objects.hash(supplierID, supplierKey, supplierName, contactName, address, city, postalCode, country, phone);
     }
 
     @Override
     public String toString() {
-        return "SuppliersEntity{" +
+        return "SupplierEntity{" +
                 "supplierID=" + supplierID +
+                ", supplierKey='" + supplierKey + '\'' +
                 ", supplierName='" + supplierName + '\'' +
                 ", contactName='" + contactName + '\'' +
                 ", address='" + address + '\'' +

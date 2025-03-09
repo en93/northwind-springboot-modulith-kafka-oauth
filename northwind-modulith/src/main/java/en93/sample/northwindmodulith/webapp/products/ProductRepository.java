@@ -7,13 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
 
-    @Query("SELECT p from ProductEntity p " +
-            "WHERE :productKey IS NULL OR :productKey = p.productID")
-    Page<ProductEntity> searchProducts(Integer productKey, Pageable pageable);
+    @Query(value = "SELECT * from products p " +
+            "WHERE (:productKey IS NULL OR :productKey = p.productKey) " +
+            "AND (:searchProduct IS NULL OR p.tsv_content @@ to_tsquery(:searchProduct))", nativeQuery = true)
+    Page<ProductEntity> searchProducts(String productKey, String searchProduct, Pageable pageable);
 
 }
