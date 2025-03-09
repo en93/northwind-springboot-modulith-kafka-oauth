@@ -1,7 +1,7 @@
-package en93.sample.northwindmodulith.webapp.suppliers;
+package en93.sample.northwindmodulith.webapp.repositories;
 
 
-import en93.sample.northwindmodulith.entities.SupplierEntity;
+import en93.sample.northwindmodulith.webapp.entities.SupplierEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

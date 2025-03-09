@@ -1,12 +1,9 @@
-package en93.sample.northwindmodulith.mappers;
+package en93.sample.northwindmodulith.webapp.mappers;
 
-import en93.sample.northwindmodulith.entities.ProductEntity;
-import en93.sample.northwindmodulith.entities.SupplierEntity;
+import en93.sample.northwindmodulith.webapp.entities.ProductEntity;
 import en93.sample.northwindmodulith.generated.webapp.model.ProductDTO;
-import en93.sample.northwindmodulith.generated.webapp.model.SupplierDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(uses = SupplierMapper.class)

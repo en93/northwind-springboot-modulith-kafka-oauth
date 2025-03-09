@@ -1,5 +1,5 @@
 
-package en93.sample.northwindmodulith.entities;
+package en93.sample.northwindmodulith.webapp.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

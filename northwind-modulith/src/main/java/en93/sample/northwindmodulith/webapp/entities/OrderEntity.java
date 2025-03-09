@@ -1,4 +1,4 @@
-package en93.sample.northwindmodulith.entities;
+package en93.sample.northwindmodulith.webapp.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

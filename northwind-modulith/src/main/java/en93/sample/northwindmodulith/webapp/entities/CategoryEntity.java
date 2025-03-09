@@ -1,5 +1,5 @@
 
-package en93.sample.northwindmodulith.entities;
+package en93.sample.northwindmodulith.webapp.entities;
 //todo fix package name
 
 import javax.persistence.*;

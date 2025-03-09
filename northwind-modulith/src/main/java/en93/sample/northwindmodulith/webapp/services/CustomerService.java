@@ -1,17 +1,17 @@
-package en93.sample.northwindmodulith.webapp.customers;
+package en93.sample.northwindmodulith.webapp.services;
 
 
 import en93.sample.northwindmodulith.generated.webapp.model.CustomerDTO;
 import en93.sample.northwindmodulith.generated.webapp.model.CustomerSortEnumDTO;
 import en93.sample.northwindmodulith.generated.webapp.model.SortDirectionEnumDTO;
-import en93.sample.northwindmodulith.mappers.CustomerMapper;
+import en93.sample.northwindmodulith.webapp.repositories.CustomerRepository;
+import en93.sample.northwindmodulith.webapp.mappers.CustomerMapper;
 import en93.sample.northwindmodulith.webapp.utils.PaginationUtil;
 import en93.sample.northwindmodulith.webapp.utils.SortConversionUtil;
 import en93.sample.northwindmodulith.webapp.utils.TextSearchUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service

@@ -1,6 +1,6 @@
-package en93.sample.northwindmodulith.mappers;
+package en93.sample.northwindmodulith.webapp.mappers;
 
-import en93.sample.northwindmodulith.entities.OrderEntity;
+import en93.sample.northwindmodulith.webapp.entities.OrderEntity;
 import en93.sample.northwindmodulith.generated.webapp.model.OrderDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

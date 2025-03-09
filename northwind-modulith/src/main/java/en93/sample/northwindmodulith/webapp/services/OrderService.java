@@ -1,16 +1,15 @@
-package en93.sample.northwindmodulith.webapp.orders;
+package en93.sample.northwindmodulith.webapp.services;
 
-import en93.sample.northwindmodulith.generated.webapp.model.CustomerSortEnumDTO;
 import en93.sample.northwindmodulith.generated.webapp.model.OrderDTO;
 import en93.sample.northwindmodulith.generated.webapp.model.OrderSortEnumDTO;
 import en93.sample.northwindmodulith.generated.webapp.model.SortDirectionEnumDTO;
-import en93.sample.northwindmodulith.mappers.OrderMapper;
+import en93.sample.northwindmodulith.webapp.mappers.OrderMapper;
+import en93.sample.northwindmodulith.webapp.repositories.OrderRepository;
 import en93.sample.northwindmodulith.webapp.utils.PaginationUtil;
 import en93.sample.northwindmodulith.webapp.utils.SortConversionUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,10 +29,9 @@ public class OrderService {
     }
 
     public Page<OrderDTO> getOrders(String orderKey, String customerKey, Integer limit, Integer offset, SortDirectionEnumDTO sortDirection, OrderSortEnumDTO sortField) {
-        var key = orderKey != null ? Integer.valueOf(orderKey) : null;
         var entitySortField = sortConversionUtil.getEntitySortField(sortField, SORT_MAP);
         var pageable = paginationUtil.buildPageRequest(limit, offset, entitySortField, sortDirection);
 
-        return orderRepository.searchOrders(key, pageable).map(OrderMapper.INSTANCE::toDto);
+        return orderRepository.searchOrders(orderKey, customerKey, pageable).map(OrderMapper.INSTANCE::toDto);
     }
 }

@@ -1,10 +1,11 @@
-package en93.sample.northwindmodulith.webapp.products;
+package en93.sample.northwindmodulith.webapp.controllers;
 
 
 import en93.sample.northwindmodulith.generated.webapp.api.ProductsApi;
 import en93.sample.northwindmodulith.generated.webapp.model.GetProducts200ResponseDTO;
 import en93.sample.northwindmodulith.generated.webapp.model.ProductSortEnumDTO;
 import en93.sample.northwindmodulith.generated.webapp.model.SortDirectionEnumDTO;
+import en93.sample.northwindmodulith.webapp.services.ProductService;
 import en93.sample.northwindmodulith.webapp.utils.PaginationUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
