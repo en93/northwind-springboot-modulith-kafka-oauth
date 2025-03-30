@@ -2,7 +2,7 @@
 package en93.sample.northwindmodulith.webapp.entities;
 
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

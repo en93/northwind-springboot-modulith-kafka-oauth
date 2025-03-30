@@ -3,7 +3,6 @@
     <option name="MAIN_CLASS_NAME" value="en93.sample.northwindmodulith.impl.NorthwindModulithApplication" />
     <module name="northwind-modulith" />
     <option name="VM_PARAMETERS" value="-Dspring.profiles.active=dev" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="en93.sample.northwindmodulith.impl.*" />
