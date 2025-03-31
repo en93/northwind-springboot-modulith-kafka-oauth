@@ -277,18 +277,6 @@
 <!--			<version>3.19.16</version>-->
 <!--		</dependency>-->
 	</dependencies>
-<!--	<dependencyManagement>-->
-<!--		<dependencies>-->
-<!--			<dependency>-->
-<!--				<groupId>org.springframework.modulith</groupId>-->
-<!--				<artifactId>spring-modulith-bom</artifactId>-->
-<!--				<version>${spring-modulith.version}</version>-->
-<!--				<type>pom</type>-->
-<!--				<scope>import</scope>-->
-<!--			</dependency>-->
-<!--			</dependency>-->
-<!--		</dependencies>-->
-<!--	</dependencyManagement>-->
 
 	<build>
 		<plugins>
