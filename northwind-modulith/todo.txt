@@ -1,0 +1,34 @@
+Focus is getting this done and out of the way
+
+Java
+Re-evaluate the data-model and mappings
+
+Testing
+postman proj
+Simple script to perf test
+
+Frontend
+Build UI vibe code
+
+Auth system + Java
+Login with password
+    second database in postgres
+
+Kafka
+Have CMS talk to auth over kafka mq
+    Check user permissions
+
+Steps:
+The web frontend
+    Figure out what the UI should be
+    Vibe code it
+Lock down the swagger
+Align java side
+Build postman collection
+Build login features
+    login
+    whitelist roles
+    Tightly couple at first
+Get all working from ui and java
+Separate into modulith
+Call it finished

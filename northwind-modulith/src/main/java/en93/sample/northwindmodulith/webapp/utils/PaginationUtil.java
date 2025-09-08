@@ -42,6 +42,7 @@ public class PaginationUtil {
         return PageRequest.of(page, limit);
     }
 
+    //todo, change to cursor based pagination?
     public <T> PaginationDataDTO buildPaginationResponse(Page<T> orders) {
         var pagination = new PaginationDataDTO();
         pagination.setSize(orders.getSize());

@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  northwind-db:
+    image: postgres:latest
+    container_name: northwind
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: northwind
+    volumes:
+      - northwind-data:/var/lib/postgresql/data
+
+
+volumes:
+  northwind-data:
