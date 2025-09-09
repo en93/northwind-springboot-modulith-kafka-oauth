@@ -21,8 +21,8 @@ public class OrderController implements OrdersApi {
     }
 
     @Override
-    public ResponseEntity<GetOrders200ResponseDTO> getOrders(String orderKey, String customerKey, String searchOrder, Integer limit, Integer offset, OrderSortEnumDTO orderSortField, SortDirectionEnumDTO sortDirection) {
-        var orders = orderService.getOrders(orderKey, customerKey, searchOrder, limit, offset, sortDirection, orderSortField);
+    public ResponseEntity<GetOrders200ResponseDTO> getOrders(String orderKey, String customerKey, Integer limit, Integer offset, OrderSortEnumDTO orderSortField, SortDirectionEnumDTO sortDirection) {
+        var orders = orderService.getOrders(orderKey, customerKey, limit, offset, sortDirection, orderSortField);
 
         var response = new GetOrders200ResponseDTO();
         response.setData(orders.getContent());

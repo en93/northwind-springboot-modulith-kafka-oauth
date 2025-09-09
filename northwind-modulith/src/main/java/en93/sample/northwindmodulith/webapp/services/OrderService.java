@@ -31,12 +31,12 @@ public class OrderService {
         this.textSearchUtil = textSearchUtil;
     }
 
-    public Page<OrderDTO> getOrders(String orderKey, String customerKey, String orderSearch, Integer limit, Integer offset, SortDirectionEnumDTO sortDirection, OrderSortEnumDTO sortField) {
+    public Page<OrderDTO> getOrders(String orderKey, String customerKey, Integer limit, Integer offset, SortDirectionEnumDTO sortDirection, OrderSortEnumDTO sortField) {
 
-        var formatSearch = textSearchUtil.formatQueryForSearch(orderSearch);
+//        var formatSearch = textSearchUtil.formatQueryForSearch(orderSearch);
         var entitySortField = sortConversionUtil.getEntitySortField(sortField, SORT_MAP);
         var pageable = paginationUtil.buildPageRequest(limit, offset, entitySortField, sortDirection);
 
-        return orderRepository.searchOrders(orderKey, customerKey, formatSearch, pageable).map(OrderMapper.INSTANCE::toDto);
+        return orderRepository.searchOrders(orderKey, customerKey, pageable).map(OrderMapper.INSTANCE::toDto);
     }
 }

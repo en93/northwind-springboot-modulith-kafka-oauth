@@ -83,12 +83,13 @@ paths:
           required: false
           schema:
             type: string
-        - name: searchOrder
-          in: query
-          description: Search for an order via its details
-          required: false
-          schema:
-            type: string
+            # table not suitable for full text search
+#        - name: searchOrder
+#          in: query
+#          description: Search for an order via its details
+#          required: false
+#          schema:
+#            type: string
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/OrderSortField'
@@ -263,13 +264,14 @@ components:
       properties:
         productKey:
           type: string
-          example: 'PRD-001'
+          example: 'PROD-0f362ff5-a954-41a4-a453-7ac41397eceb'
         name:
           type: string
           example: 'Blink Notepad'
-        description:
-          type: string
-          example: 'Large notepad'
+#        Fields not supplied
+#        description:
+#          type: string
+#          example: 'Large notepad'
         supplier:
           $ref: '#/components/schemas/Supplier'
         category:
@@ -365,9 +367,10 @@ components:
     Category:
       type: object
       properties:
-        categoryId:
-          type: integer
-          format: int32
+#         Do not expose internal ids
+#        categoryId:
+#          type: integer
+#          format: int32
         categoryName:
           type: string
         description:
